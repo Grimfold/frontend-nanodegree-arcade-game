@@ -8,12 +8,11 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
 
     // For now, assume all bugs travel left to right
-    // starting just off canvas (x = -100)
-    this.x = -100;
+    // starting just off canvas (x = -110)
+    this.x = -110;
 
     // There are 3 valid starting positions
     // y = 60, 145, 230
-    // Random whole number 0,1,2
     this.y = 60 + (Math.floor(Math.random() * 3) * 85);
 
     // Randomize the speed and quantize
@@ -26,7 +25,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + dt*this.speed;
+    this.x = this.x + (dt * this.speed);
+    //console.log(this.x);
+
+    // If fall off rhs of canvas, wrap around
+    if (this.x > 505) {
+      this.x = -110;
+    }
 };
 
 // Draw the enemy on the screen, required method for game

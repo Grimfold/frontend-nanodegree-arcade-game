@@ -30,8 +30,12 @@ Enemy.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+// Next 3 lines minimum required to provide initial canvas render
+testEnemy = new Enemy();
+allEnemies = [ testEnemy ];
+player = new Enemy();
 
-
+//console.log testEnemy;
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {

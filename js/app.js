@@ -43,6 +43,28 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+var Player = function() {
+    // It's basically an enemy (although all this actually does is give it a
+    // speed we never use)
+    Enemy.call(this);
+
+    // The image/sprite for our player
+    this.sprite = 'images/char-boy.png';
+
+    // starting in middle of bottom row
+    this.x = 200;
+    this.y = 420;
+};
+
+// Player to inherit the methods of Enemy from prototype chain
+// This *sounds* wrong, but has at least 2 advantages:
+// 1 - saves writing duplicate render method on 2 different classes
+// 2 - code executes earlier before writing all the Player specific methods
+// (Probably cleaner to have a sprite parent class above Enemy and Player)
+
+Player.prototype = Object.create(Enemy.prototype);
+Player.prototype.constructor = Player;
+Player.prototype.update = function() {};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -51,7 +73,7 @@ Enemy.prototype.render = function() {
 // Next 3 lines minimum required to provide initial canvas render
 testEnemy = new Enemy();
 allEnemies = [ testEnemy ];
-player = new Enemy();
+player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

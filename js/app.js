@@ -32,6 +32,14 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
       this.x = -110;
     }
+    //easier to do collision detection here
+    //console.log(this.x, player.x, this.y, player.y);
+    if ((this.x > player.x - 40) && (this.x < player.x + 40) && (this.y > player.y - 40) && (this.y < player.y + 40)) {
+      //console.log('collision');
+      //Reset player position
+      player.x = 200;
+      player.y = 420;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -67,11 +75,11 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function() {};
 Player.prototype.handleInput = function(direction) {
   //console.log(keyPress);
-  if (direction == 'left') this.x = this.x - 95;
-  if (direction == 'right') this.x = this.x + 95;
+  if (direction == 'left' && this.x > 94) this.x = this.x - 95;
+  if (direction == 'right' && this.x < 390) this.x = this.x + 95;
   // remember canvas counts Y axis upside down ...
-  if (direction == 'up') this.y = this.y - 90;
-  if (direction == 'down') this.y = this.y + 90;
+  if (direction == 'up' && this.y > 50) this.y = this.y - 90;
+  if (direction == 'down' & this.y < 420) this.y = this.y + 90;
 };
 
 // Now instantiate your objects.

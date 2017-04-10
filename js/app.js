@@ -45,7 +45,7 @@ Enemy.prototype.render = function() {
 
 var Player = function() {
     // It's basically an enemy (although all this actually does is give it a
-    // speed we never use)
+    // speed we never use, as other attributes are clobbered)
     Enemy.call(this);
 
     // The image/sprite for our player
@@ -65,6 +65,9 @@ var Player = function() {
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.update = function() {};
+Player.prototype.handleInput = function(keyPress) {
+  console.log(keyPress);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -77,13 +80,19 @@ player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+// ... but I did anyway, as spent an hour trying to figure out why WASD
+// kept returning undef in Player.handleInput!!!!
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        65: 'left',
+        87: 'up',
+        68: 'right',
+        83: 'down'
     };
-
+    //console.log(e.keyCode);
     player.handleInput(allowedKeys[e.keyCode]);
 });

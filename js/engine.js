@@ -150,8 +150,8 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-        console.log(player.x);
-        console.log(player.y);
+        //console.log(player.x);
+        //console.log(player.y);
         //console.log(player.speed);
         player.render();
     }

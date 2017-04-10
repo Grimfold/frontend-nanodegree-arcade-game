@@ -13,5 +13,5 @@ Open index.html in any supported browser (only tested in Chrome, but should func
 2 - How to Play
 ===============
 
-Use WASD or Arrow keys to move your ~~Frog~~ Weird Antenna Booblehead to the water at the top, without
+Use WASD or Arrow keys to move your ~~Frog~~ Weird Antenna Bobblehead to the water at the top, without
 colliding with the beetles.

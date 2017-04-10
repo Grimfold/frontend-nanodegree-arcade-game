@@ -1,50 +1,50 @@
 // Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+  // Variables applied to each of our instances go here,
+  // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
+  // The image/sprite for our enemies, this uses
+  // a helper we've provided to easily load images
+  this.sprite = 'images/enemy-bug.png';
 
-    // For now, assume all bugs travel left to right
-    // starting just off canvas (x = -110)
-    this.x = -110;
+  // For now, assume all bugs travel left to right
+  // starting just off canvas (x = -110)
+  this.x = -110;
 
-    // There are 3 valid starting positions
-    // y = 60, 145, 230
-    this.y = 60 + (Math.floor(Math.random() * 3) * 85);
+  // There are 3 valid starting positions
+  // y = 60, 145, 230
+  this.y = 60 + (Math.floor(Math.random() * 3) * 85);
 
-    // Randomize the speed and quantize
-    this.speed = 50 + (Math.floor(Math.random() * 5) * 50);
+  // Randomize the speed and quantize
+  this.speed = 50 + (Math.floor(Math.random() * 5) * 50);
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x = this.x + (dt * this.speed);
-    //console.log(this.x);
+  // You should multiply any movement by the dt parameter
+  // which will ensure the game runs at the same speed for
+  // all computers.
+  this.x = this.x + (dt * this.speed);
+  //console.log(this.x);
 
-    // If fall off rhs of canvas, wrap around
-    if (this.x > 505) {
-      this.x = -110;
-    }
-    //easier to do collision detection here
-    //console.log(this.x, player.x, this.y, player.y);
-    if ((this.x > player.x - 40) && (this.x < player.x + 40) && (this.y > player.y - 40) && (this.y < player.y + 40)) {
-      //console.log('collision');
-      //Reset player position (as no obvious way to use a destructor and create a new object)
-      player.x = 200;
-      player.y = 420;
-    }
+  // If fall off rhs of canvas, wrap around
+  if (this.x > 505) {
+    this.x = -110;
+  }
+  //easier to do collision detection here
+  //console.log(this.x, player.x, this.y, player.y);
+  if ((this.x > player.x - 40) && (this.x < player.x + 40) && (this.y > player.y - 40) && (this.y < player.y + 40)) {
+    //console.log('collision');
+    //Reset player position (as no obvious way to use a destructor and create a new object)
+    player.x = 200;
+    player.y = 420;
+  }
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
@@ -52,16 +52,16 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 var Player = function() {
-    // It's basically an enemy (although all this actually does is give it a
-    // speed we never use, as other attributes are clobbered)
-    Enemy.call(this);
+  // It's basically an enemy (although all this actually does is give it a
+  // speed we never use, as other attributes are clobbered)
+  Enemy.call(this);
 
-    // The image/sprite for our player
-    this.sprite = 'images/char-boy.png';
+  // The image/sprite for our player
+  this.sprite = 'images/char-boy.png';
 
-    // starting in middle of bottom row
-    this.x = 200;
-    this.y = 420;
+  // starting in middle of bottom row
+  this.x = 200;
+  this.y = 420;
 };
 
 // Player to inherit the methods of Enemy from prototype chain
@@ -104,16 +104,16 @@ player = new Player();
 // ... but I did anyway, as spent an hour trying to figure out why WASD
 // kept returning undef in Player.handleInput!!!!
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        65: 'left',
-        87: 'up',
-        68: 'right',
-        83: 'down'
-    };
-    //console.log(e.keyCode);
-    player.handleInput(allowedKeys[e.keyCode]);
+  var allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down',
+    65: 'left',
+    87: 'up',
+    68: 'right',
+    83: 'down'
+  };
+  //console.log(e.keyCode);
+  player.handleInput(allowedKeys[e.keyCode]);
 });

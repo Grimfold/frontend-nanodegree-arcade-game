@@ -65,8 +65,13 @@ var Player = function() {
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.update = function() {};
-Player.prototype.handleInput = function(keyPress) {
-  console.log(keyPress);
+Player.prototype.handleInput = function(direction) {
+  //console.log(keyPress);
+  if (direction == 'left') this.x = this.x - 95;
+  if (direction == 'right') this.x = this.x + 95;
+  // remember canvas counts Y axis upside down ...
+  if (direction == 'up') this.y = this.y - 90;
+  if (direction == 'down') this.y = this.y + 90;
 };
 
 // Now instantiate your objects.

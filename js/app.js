@@ -36,7 +36,7 @@ Enemy.prototype.update = function(dt) {
     //console.log(this.x, player.x, this.y, player.y);
     if ((this.x > player.x - 40) && (this.x < player.x + 40) && (this.y > player.y - 40) && (this.y < player.y + 40)) {
       //console.log('collision');
-      //Reset player position
+      //Reset player position (as no obvious way to use a destructor and create a new object)
       player.x = 200;
       player.y = 420;
     }
@@ -74,12 +74,20 @@ Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.update = function() {};
 Player.prototype.handleInput = function(direction) {
-  //console.log(keyPress);
+  // Random numbers that seem to work chosen to bound playing board
   if (direction == 'left' && this.x > 94) this.x = this.x - 95;
   if (direction == 'right' && this.x < 390) this.x = this.x + 95;
   // remember canvas counts Y axis upside down ...
   if (direction == 'up' && this.y > 50) this.y = this.y - 90;
   if (direction == 'down' & this.y < 420) this.y = this.y + 90;
+  // Have we reached destination ?
+  if (this.y < 50) {
+    // add another enemy
+    allEnemies.push(new Enemy());
+    // reset position
+    this.x = 200;
+    this.y = 420;
+  }
 };
 
 // Now instantiate your objects.
@@ -87,8 +95,8 @@ Player.prototype.handleInput = function(direction) {
 // Place the player object in a variable called player
 
 // Next 3 lines minimum required to provide initial canvas render
-testEnemy = new Enemy();
-allEnemies = [ testEnemy ];
+firstEnemy = new Enemy();
+allEnemies = [ firstEnemy ];
 player = new Player();
 
 // This listens for key presses and sends the keys to your

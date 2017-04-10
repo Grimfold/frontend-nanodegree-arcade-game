@@ -14,4 +14,4 @@ Open index.html in any supported browser (only tested in Chrome, but should func
 ===============
 
 Use WASD or Arrow keys to move your ~~Frog~~ Weird Antenna Bobblehead to the water at the top, without
-colliding with the beetles.
+colliding with the beetles. An additional beetle will appear each time you succeed.
